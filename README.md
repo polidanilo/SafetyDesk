@@ -1,11 +1,9 @@
 # SafetyDesk
 
 Agente AI per la gestione della coda scadenze di un ufficio tecnico antincendio.  
-*Progetto dimostrativo di portfolio con dati e schede sintetici*
+*Progetto dimostrativo di portfolio con dati e schede sintetici.*
 
-L'operatore consulta la coda clienti o interroga l'agente in italiano (es. *"Controlla Officine Rossi, dimmi cosa è scaduto, cosa prevede la scheda di manutenzione e prepara intervento e mail"*). L'agente interroga il registro clienti (estintori, idranti, attestati), recupera le schede di periodicità e le procedure interne tramite RAG, classifica la priorità e prepara una bozza di ticket e di email. **Senza un clic esplicito su Approva, non viene scritta alcuna riga nel database né generata alcuna email.**
-
-> **Principio architetturale:** Il modello sceglie i tool e scrive l'italiano. Il codice decide se una data è scaduta e se una scrittura è autorizzata.
+L'operatore consulta la coda clienti o interroga l'agente in italiano (es. *"Controlla Officine Rossi, dimmi cosa è scaduto, cosa prevede la scheda di manutenzione e prepara intervento e mail"*). L'agente interroga il registro clienti (estintori, idranti, attestati), recupera le schede di periodicità e le procedure interne tramite RAG, classifica la priorità e prepara una bozza di ticket e di email. **Senza un clic esplicito su Approva dall'operatore, non viene scritta alcuna riga nel database né generata alcuna email.**
 
 **Video demo:** `https://youtu.be/uBZWgq4ZJoo`
 
@@ -14,17 +12,17 @@ L'operatore consulta la coda clienti o interroga l'agente in italiano (es. *"Con
 ## Flusso operativo
 
 ```text
-Operatore (Streamlit)
+Operatore
   │
   ▼
-Agente AI (LangChain + Gemini Flash)
-  ├──► query_client_status / list_due   ──► SQLite + rules_engine.py (calcolo deterministico date)
+Agente AI (LangChain + Gemini)
+  ├──► query_client_status / list_due   ──► SQLite + rules_engine.py (calcolo deterministico delle date)
   ├──► lookup_rule                      ──► Tabella rules (periodicità e fonte)
   ├──► search_procedures                ──► ChromaDB locale (RAG su procedure markdown)
-  └──► propose_intervention             ──► Genera solo una bozza (nessuna scrittura)
+  └──► propose_intervention             ──► Genera solo una bozza di email
   │
   ▼
-Gate Human-in-the-Loop (blocco in codice)
+Gate Human-in-the-Loop
   ├── [Rifiuta] ──► Registra solo audit log ("rifiutato"), database invariato
   └── [Approva] ──► commit_intervention(approved=True) ──► Ticket DB + Email in outbox/ + Audit log
 
