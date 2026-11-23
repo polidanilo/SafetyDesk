@@ -5,3 +5,4 @@ __pycache__/
 data/*.db
 outbox/
 chroma_db/
+coda_presidi.db

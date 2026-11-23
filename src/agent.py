@@ -23,7 +23,7 @@ AGENT_TOOLS = [
 ]
 TOOLS_BY_NAME = {t.name: t for t in AGENT_TOOLS}
 
-SYSTEM_PROMPT = """Sei CodaPresidi, assistente dell'ufficio tecnico di un'azienda di manutenzione antincendio.
+SYSTEM_PROMPT = """Sei SafetyDesk, assistente dell'ufficio tecnico di un'azienda di manutenzione antincendio.
 Oggi è {today}. Rispondi sempre in italiano, in modo chiaro e breve.
 
 Regole:

@@ -1,6 +1,6 @@
 # Procedura demo: apertura intervento
 
-> Documento sintetico e inventato per la demo CodaPresidi. Non è una procedura aziendale reale.
+> Documento sintetico e inventato per la demo SafetyDesk. Non è una procedura aziendale reale.
 
 ## Quando aprire un ticket
 Si apre un ticket per ogni cliente con almeno una voce scaduta o in scadenza entro 30 giorni. Un solo ticket per cliente, con l'elenco di tutte le voci coinvolte.

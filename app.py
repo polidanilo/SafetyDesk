@@ -1,4 +1,4 @@
-"""Interfaccia Streamlit di CodaPresidi. Avvio: streamlit run app.py"""
+"""Interfaccia Streamlit di SafetyDesk. Avvio: streamlit run app.py"""
 
 import json
 
@@ -7,7 +7,7 @@ import streamlit as st
 from src import tools
 from src.agent import run_agent
 
-st.set_page_config(page_title="CodaPresidi", layout="wide")
+st.set_page_config(page_title="SafetyDesk", layout="wide")
 
 DEFAULT_PROMPT = (
     "Controlla la situazione del cliente Officine Rossi S.r.l., dimmi quali presidi sono scaduti, "
@@ -26,7 +26,7 @@ with st.sidebar:
                     f"{row['scaduti']} scadute · {row['in_scadenza']} in scadenza")
     st.caption("Dati inventati a scopo dimostrativo. Le date sono calcolate dal codice, non dal modello.")
 
-st.title("CodaPresidi")
+st.title("SafetyDesk")
 
 col_main, col_trace = st.columns([3, 2])
 

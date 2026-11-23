@@ -1,6 +1,6 @@
 # Procedura demo: mail al cliente
 
-> Documento sintetico e inventato per la demo CodaPresidi. Non è una procedura aziendale reale.
+> Documento sintetico e inventato per la demo SafetyDesk. Non è una procedura aziendale reale.
 
 ## Struttura della mail
 Oggetto chiaro con il nome del cliente e il motivo (scadenze di manutenzione). Corpo in quattro parti: saluto, elenco delle voci scadute o in scadenza con le date, proposta di intervento, invito a rispondere per concordare la data.

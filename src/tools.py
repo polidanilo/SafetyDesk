@@ -1,7 +1,6 @@
 """Tool dell'agente. Lettura libera, scrittura solo con approvazione esplicita."""
 
 import json
-import re
 import sqlite3
 from contextlib import closing
 from datetime import date, datetime
@@ -11,6 +10,7 @@ from typing import Literal
 from langchain_core.tools import tool
 from pydantic import BaseModel, Field
 
+from src.rag import search_docs
 from src.rules_engine import evaluate, priority_for
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -123,33 +123,9 @@ def rule_lookup(asset_type: str, activity: str | None = None) -> dict:
     return {"found": True, "rules": rows}
 
 
-def _sections() -> list[dict]:
-    out = []
-    for f in sorted(DOCS_DIR.glob("*.md")):
-        title, buf = None, []
-        for line in f.read_text(encoding="utf-8").splitlines():
-            if line.startswith("## "):
-                if title:
-                    out.append({"source": f"{f.name} > {title}", "text": "\n".join(buf).strip()})
-                title, buf = line[3:].strip(), []
-            elif title:
-                buf.append(line)
-        if title:
-            out.append({"source": f"{f.name} > {title}", "text": "\n".join(buf).strip()})
-    return out
-
-
 def procedure_search(query: str) -> dict:
-    words = {w for w in re.findall(r"\w+", query.lower()) if len(w) > 3}
-    scored = []
-    for s in _sections():
-        haystack = (s["source"] + " " + s["text"]).lower()
-        score = sum(1 for w in words if w in haystack)
-        if score:
-            scored.append((score, s))
-    scored.sort(key=lambda x: -x[0])
-    return {"results": [s for _, s in scored[:2]]}
-
+    """Ricerca semantica (Chroma). Stesso formato di prima: {"results": [{"source", "text"}]}."""
+    return {"results": [{"source": r["source"], "text": r["content"]} for r in search_docs(query, k=2)]}
 
 # ---------- proposta e scrittura ----------
 
