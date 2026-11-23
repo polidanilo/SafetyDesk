@@ -3,7 +3,7 @@
 Agente AI per la gestione della coda scadenze di un ufficio tecnico antincendio.  
 *Progetto dimostrativo di portfolio con dati e schede sintetici.*
 
-L'operatore consulta la coda clienti o interroga l'agente in italiano (es. *"Controlla Officine Rossi, dimmi cosa è scaduto, cosa prevede la scheda di manutenzione e prepara intervento e mail"*). L'agente interroga il registro clienti (estintori, idranti, attestati), recupera le schede di periodicità e le procedure interne tramite RAG, classifica la priorità e prepara una bozza di ticket e di email. **Senza un clic esplicito su Approva da parte dell'operatore, non viene scritta alcuna riga nel database né generata alcuna email.**
+L'operatore consulta la coda clienti o interroga l'agente in italiano (es. *"Controlla Officine Rossi, dimmi cosa è scaduto, cosa prevede la scheda di manutenzione e prepara intervento e mail"*). L'agente interroga il registro clienti (estintori, idranti, attestati), recupera le schede di periodicità e le procedure interne tramite Retrieval-Augmented Generation (RAG) con ChromaDB, classifica la priorità e prepara una bozza di ticket e di email. **Senza un clic esplicito su Approva da parte dell'operatore, non viene scritta alcuna riga nel database né generata alcuna email.**
 
 **Video demo:** [Guarda su YouTube](https://youtu.be/uBZWgq4ZJoo)
 
@@ -31,7 +31,7 @@ Gate Human-in-the-Loop
 
 ## Cos'è il RAG e come viene usato qui
 
-Il **RAG (Retrieval-Augmented Generation)** è un'architettura che permette a un modello linguistico (LLM) di cercare informazioni all'interno di documenti esterni prima di formulare una risposta, invece di affidarsi soltanto alla propria memoria di addestramento. Questo riduce drasticamente le allucinazioni e consente di aggiornare le regole aziendali senza riaddestrare il modello.
+Il **RAG** è un'architettura che permette a un modello linguistico (LLM) di cercare informazioni all'interno di documenti esterni prima di formulare una risposta, invece di affidarsi soltanto alla propria memoria di addestramento. Questo riduce drasticamente le allucinazioni e consente di aggiornare le regole aziendali senza riaddestrare il modello.
 
 In **SafetyDesk**, il RAG è implementato in locale con **ChromaDB**:
 * I documenti di procedura in `data/docs/` (criteri di priorità dei ticket, tono e struttura delle email ai clienti) vengono suddivisi per sezione e indicizzati tramite un modello di embedding locale (`all-MiniLM-L6-v2` via ONNX, senza chiamate API aggiuntive).
