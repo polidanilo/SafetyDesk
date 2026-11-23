@@ -5,7 +5,7 @@ Agente AI per la gestione della coda scadenze di un ufficio tecnico antincendio.
 
 L'operatore consulta la coda clienti o interroga l'agente in italiano (es. *"Controlla Officine Rossi, dimmi cosa è scaduto, cosa prevede la scheda di manutenzione e prepara intervento e mail"*). L'agente interroga il registro clienti (estintori, idranti, attestati), recupera le schede di periodicità e le procedure interne tramite RAG, classifica la priorità e prepara una bozza di ticket e di email. **Senza un clic esplicito su Approva da parte dell'operatore, non viene scritta alcuna riga nel database né generata alcuna email.**
 
-**Video demo:** [Guarda la demo su YouTube](https://youtu.be/uBZWgq4ZJoo)
+**Video demo:** [Guarda su YouTube](https://youtu.be/uBZWgq4ZJoo)
 
 ---
 
